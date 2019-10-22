@@ -9,10 +9,10 @@ export const QuillWatch = {
             this.watcher[imageExtendId] = ImageExtend
         }
     },
-    emit: function (activeId, type = 1) {  // 事件发射触发
+    emit: function (activeId, fileType = "", type = 1) {  // 事件发射触发
         this.active = this.watcher[activeId]
         if (type === 1) {
-            imgHandler()
+            imgHandler(fileType)
         }
     }
 }
@@ -243,11 +243,12 @@ export class ImageExtend {
 /**
  * @description 点击图片上传
  */
-export function imgHandler() {
+export function imgHandler(fileType) {
     let fileInput = document.querySelector('.quill-image-input');
     if (fileInput === null) {
         fileInput = document.createElement('input');
         fileInput.setAttribute('type', 'file');
+        fileInput.setAttribute('accept', fileType);
         fileInput.classList.add('quill-image-input');
         fileInput.style.display = 'none'
         // 监听选择文件
