@@ -270,8 +270,8 @@ export function imgHandler(fileType) {
             }
         })
         document.body.appendChild(fileInput);
+        fileInput.click();
     }
-    fileInput.click();
 }
 
 /**
