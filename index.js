@@ -92,7 +92,7 @@ export class ImageExtend {
      * @param e
      */
     dropHandle(e) {
-        QuillWatch.emit(this.quill.id, 0)
+        QuillWatch.emit(this.quill.id, 0, 0);
         const self = this
         e.preventDefault()
         // 如果图片限制大小
@@ -103,6 +103,12 @@ export class ImageExtend {
             return
         }
         self.file = e.dataTransfer.files[0]; // 获取到第一个上传的文件对象
+        if (!self.file.type.includes("image")) {
+          if (self.config.typeError) {
+            self.config.typeError();
+          }
+          return;
+        }
         if (this.config.action) {
             self.uploadImg()
         } else {
